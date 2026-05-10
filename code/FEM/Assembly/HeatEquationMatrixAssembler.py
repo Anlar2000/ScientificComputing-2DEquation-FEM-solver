@@ -1,8 +1,19 @@
+import sys
+import os
+
+# 1. Find the project root (3 levels up from Assembly)
+root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+
+# 2. Add it to the system path so Python can find 'code'
+if root_path not in sys.path:
+    sys.path.insert(0, root_path)
+
+
 import numpy as np
 import scipy
 # Initialize Global Matrices (using scipy.sparse for memory efficiency)
 from scipy.sparse import lil_matrix
-from code.FEM.Mesh.StructuredGrid import GenerateMesh
+from code.FEM.Mesh.StructuredGrid import generate_mesh
 
 
 def calculate_area(coords):
@@ -66,7 +77,8 @@ def Assemble_K_and_M(elements,nodes):
 
 
 
-
+# Generate the mesh (e.g., a 10x10 grid)
+nodes, elements = generate_mesh(10)
 K, M = Assemble_K_and_M(elements, nodes)
 import matplotlib.pyplot as plt
 plt.spy(K, markersize=1)

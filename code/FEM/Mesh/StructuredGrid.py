@@ -1,3 +1,13 @@
+import sys
+import os
+
+# 1. Find the project root (3 levels up from Assembly)
+root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+
+# 2. Add it to the system path so Python can find 'code'
+if root_path not in sys.path:
+    sys.path.insert(0, root_path)
+
 import numpy as np
 import matplotlib.pyplot as plt
 
